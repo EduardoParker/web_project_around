@@ -1,0 +1,27 @@
+.profile {
+  max-width: 882px;
+  margin: 40px auto 50px;
+  display: flex;
+  column-gap: 30px;
+  align-items: center;
+}
+.profile__avatar {
+  width: 120px;
+  height: 120px;
+  background-image: url(../images/profile.jpg);
+  background-size: cover;
+  border-radius: 50%;
+}
+.profile__info {
+  width: 414px;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
+}
+.profile__info-name {
+  margin: 0;
+}
+.profile__info-aboutme {
+  margin: 0;
+}
