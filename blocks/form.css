@@ -1,0 +1,10 @@
+.form__input {
+  border: none;
+}
+.form__item {
+  border: 0;
+  width: 100%;
+  box-sizing: border-box;
+  border-bottom: 1px solid #bcbcc4;
+  margin-bottom: 30px;
+}

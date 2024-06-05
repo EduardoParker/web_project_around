@@ -1,0 +1,28 @@
+.popup {
+  position: fixed;
+  width: 430px;
+  height: 330px;
+  background-color: #fff;
+  border: 1px solid #000000;
+  border-radius: 10px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /*display: none;*/
+}
+.popup__form {
+  width: 358px;
+  margin: 0 auto;
+}
+.popup__form-name {
+  margin: 34px auto 54px;
+}
+.popup__button {
+  width: 358px;
+  height: 50px;
+  margin: 0 auto;
+  background-color: #000000;
+  color: #fff;
+  border: none;
+  border-radius: 2px;
+}
