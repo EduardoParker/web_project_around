@@ -4,10 +4,10 @@
   height: 361px;
   background-color: #fff;
   border-radius: 10px 10px 10px 10px;
-  text-align: center;
 }
 .element__image {
-  width: 100%;
+  margin: 0;
+  width: 282px;
   height: 282px;
   border-radius: 10px 10px 0 0;
 }
@@ -24,4 +24,14 @@
   position: absolute;
   bottom: 30px;
   right: 18px;
+}
+.element__description {
+  margin: 25px auto 0;
+  width: 246px;
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 30px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }

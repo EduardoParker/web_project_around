@@ -4,6 +4,7 @@
   display: flex;
   column-gap: 30px;
   align-items: center;
+  font-family: "Inter";
 }
 .profile__avatar {
   width: 120px;
@@ -26,9 +27,15 @@
 }
 .profile__name {
   margin: 0;
+  font-weight: 500;
+  font-size: 42px;
+  line-height: 56px;
 }
 .profile__info-aboutme {
   margin: 0;
+  font-weight: 400;
+  size: 18px;
+  line-height: 22px;
 }
 .profile__edit-button {
   width: 24px;
@@ -37,4 +44,43 @@
 .profile__add-button {
   width: 150px;
   height: 50px;
+  margin-left: auto;
+}
+@media screen and (min-width: 800px) and (max-width: 1279px) {
+  .profile {
+    width: 90%;
+  }
+  .profile__name {
+    font-weight: 500;
+    font-size: 40px;
+  }
+}
+@media screen and (min-width: 320px) and (max-width: 799px) {
+  .profile {
+    display: block;
+    text-align: center;
+  }
+  .profile__info {
+    margin: 0 auto 36px;
+    width: 280px;
+    row-gap: 14px;
+  }
+  .profile__info-name {
+    margin: 0 auto;
+    column-gap: 12px;
+  }
+  .profile__avatar {
+    margin: 0 auto 14px;
+  }
+  .profile__name {
+    font-size: 22px;
+  }
+  .profile__info-aboutme {
+    font-size: 14px;
+    line-height: 17px;
+  }
+  .profile__add-button {
+    width: 282px;
+    height: 50px;
+  }
 }
