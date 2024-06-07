@@ -41,10 +41,18 @@
   width: 24px;
   height: 24px;
 }
+.profile__edit-button:hover {
+  cursor: pointer;
+  background: #ffffff99;
+}
 .profile__add-button {
   width: 150px;
   height: 50px;
   margin-left: auto;
+}
+.profile__add-button:hover {
+  cursor: pointer;
+  background: #ffffff99;
 }
 @media screen and (min-width: 800px) and (max-width: 1279px) {
   .profile {

@@ -1,5 +1,6 @@
 .form__input {
   border: none;
+  font-family: "Inter";
 }
 .form__item {
   border: 0;
@@ -7,4 +8,7 @@
   box-sizing: border-box;
   border-bottom: 1px solid #bcbcc4;
   margin-bottom: 30px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
 }

@@ -16,28 +16,37 @@
   <body>
     <div class="page">
       <section class="popup">
-        <form class="popup__form">
-          <h4 class="popup__form-name">Editar perfil</h4>
-          <fieldset class="form__input">
-            <input
-              type="text"
-              class="form__item"
-              id="name"
-              name="name"
-              placeholder="Nombre"
-              required
+        <div class="popup__container">
+          <form class="popup__form">
+            <h4 class="popup__form-name">Editar perfil</h4>
+            <fieldset class="form__input">
+              <input
+                type="text"
+                class="form__item"
+                id="name"
+                name="name"
+                placeholder="Nombre"
+                required
+              />
+              <input
+                type="text"
+                class="form__item"
+                id="about-me"
+                name="about-me"
+                placeholder="Acerca de mi"
+                required
+              />
+            </fieldset>
+            <button class="popup__button popup__button_submit" type="submit">
+              Guardar
+            </button>
+            <img
+              src="./images/Close _icon.svg"
+              alt="boton de cierre"
+              class="popup__close-icon"
             />
-            <input
-              type="text"
-              class="form__item"
-              id="about-me"
-              name="about-me"
-              placeholder="Acerca de mi"
-              required
-            />
-          </fieldset>
-          <button class="popup__button" type="submit">Guardar</button>
-        </form>
+          </form>
+        </div>
       </section>
       <section class="header">
         <img
@@ -180,5 +189,6 @@
         <p class="footer__copyright">&#169; 2024 Eduardo Parker</p>
       </footer>
     </div>
+    <script src="./pages/script.js"></script>
   </body>
 </html>
