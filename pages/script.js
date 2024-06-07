@@ -13,3 +13,19 @@ profileCloseButton.addEventListener("click", closeProfile);
 function closeProfile() {
   popup.classList.remove("popup_opened");
 }
+
+let formElement = document.querySelector(".popup__form");
+
+function handleProfileFormSubmit(evt) {
+  evt.preventDefault();
+
+  let nameInput = document.querySelector("#name").value;
+  let jobInput = document.querySelector("#about-me").value;
+
+  let profileName = document.querySelector(".profile__name");
+  let profileJob = document.querySelector(".profile__info-aboutme");
+
+  profileName.textContent = `${nameInput}`;
+  profileJob.textContent = `${jobInput}`;
+}
+formElement.addEventListener("submit", handleProfileFormSubmit);
