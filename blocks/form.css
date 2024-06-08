@@ -1,8 +1,8 @@
-.form__input {
+.popup__form_input {
   border: none;
   font-family: "Inter";
 }
-.form__item {
+.popup__form_item {
   border: 0;
   width: 100%;
   box-sizing: border-box;
