@@ -1,8 +1,18 @@
-.popup__form_input {
+.form {
+  width: 358px;
+  margin: 0 auto;
+}
+.form__name {
+  margin: 34px auto 54px;
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 29px;
+}
+.form__input {
   border: none;
   font-family: "Inter";
 }
-.popup__form_item {
+.form__item {
   border: 0;
   width: 100%;
   box-sizing: border-box;
@@ -11,4 +21,43 @@
   font-weight: 400;
   font-size: 14px;
   line-height: 17px;
+}
+.form__button {
+  width: 358px;
+  height: 50px;
+  margin: 0 auto;
+  background-color: #000000;
+  color: #fff;
+  border: none;
+  border-radius: 2px;
+}
+.form__close-icon {
+  width: 40.7px;
+  height: 40.7px;
+  position: absolute;
+  top: -40px;
+  right: -40px;
+}
+.form__close-icon:hover {
+  background: #ffffff99;
+  cursor: pointer;
+}
+.form__button:hover {
+  cursor: pointer;
+  background: #000000cc;
+}
+@media screen and (min-width: 320px) and (max-width: 620px) {
+  .form {
+    width: 238px;
+  }
+  .form__button {
+    width: 238px;
+    height: 46px;
+  }
+  .form__close-icon {
+    width: 30px;
+    height: 30px;
+    top: -43px;
+    right: -2px;
+  }
 }

@@ -1,6 +1,6 @@
 let popup = document.querySelector(".popup");
 let profileButton = document.querySelector(".profile__edit-button");
-let profileCloseButton = document.querySelector(".popup__close-icon");
+let profileCloseButton = document.querySelector(".form__close-icon");
 
 profileButton.addEventListener("click", openProfile);
 
