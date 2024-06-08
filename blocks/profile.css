@@ -34,7 +34,7 @@
 .profile__info-aboutme {
   margin: 0;
   font-weight: 400;
-  size: 18px;
+  font-size: 18px;
   line-height: 22px;
 }
 .profile__edit-button {
