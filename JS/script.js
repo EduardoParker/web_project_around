@@ -1,6 +1,7 @@
 let popup = document.querySelector(".popup");
 let profileButton = document.querySelector(".profile__edit-button");
 let profileCloseButton = document.querySelector(".form__close-icon");
+let profileSaveButton = document.querySelector(".form__button_submit");
 
 profileButton.addEventListener("click", openProfile);
 
@@ -11,6 +12,12 @@ function openProfile() {
 profileCloseButton.addEventListener("click", closeProfile);
 
 function closeProfile() {
+  popup.classList.remove("popup_opened");
+}
+
+profileSaveButton.addEventListener("click", SaveAndClose);
+
+function SaveAndClose() {
   popup.classList.remove("popup_opened");
 }
 
@@ -28,4 +35,4 @@ function handleProfileFormSubmit(evt) {
   profileName.textContent = `${nameInput}`;
   profileJob.textContent = `${jobInput}`;
 }
-formElement.addEventListener("submit", handleProfileFormSubmit);
+formElement.addEventListener("submit", handleProfileFormSubmit, SaveAndClose);

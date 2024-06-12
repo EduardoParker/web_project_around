@@ -1,7 +1,7 @@
 .popup {
   position: fixed;
-  width: 100%;
-  height: 100vh;
+  width: 1280px;
+  height: 100%;
   font-family: "Inter";
   display: none;
   z-index: 1;
