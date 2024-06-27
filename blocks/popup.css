@@ -21,9 +21,6 @@
 .popup_opened {
   display: block;
 }
-.popup_opened-form {
-  display: block;
-}
 @media screen and (min-width: 320px) and (max-width: 620px) {
   .popup__container {
     width: 282px;

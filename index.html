@@ -15,7 +15,7 @@
   </head>
   <body>
     <div class="page">
-      <section class="popup">
+      <section class="popup popup__profile">
         <div class="popup__container">
           <form class="popup__form form">
             <h4 class="form__name">Editar perfil</h4>
@@ -43,14 +43,14 @@
             <img
               src="./images/Close_icon.svg"
               alt="boton de cierre"
-              class="form__close-icon"
+              class="form__close-icon form__close-icon_profile"
             />
           </form>
         </div>
       </section>
-      <section class="popup" id="form-image">
+      <section class="popup popup__form-image">
         <div class="popup__container">
-          <form class="popup__form form">
+          <form class="popup__form form form__image">
             <h4 class="form__name">Nuevo Lugar</h4>
             <fieldset class="form__input">
               <input
@@ -62,21 +62,26 @@
                 required
               />
               <input
-                type="text"
+                type="url"
                 class="form__item form__item_link"
-                id="link"
+                id="url"
                 name="link"
                 placeholder="Enlace a la imagen"
                 required
               />
             </fieldset>
-            <button class="form__button form__button_submit" type="submit">
+            <button
+              class="form__button form__button_submit form__button_submit_image"
+              type="submit"
+              id="create-image"
+            >
               Crear
             </button>
             <img
               src="./images/Close_icon.svg"
               alt="boton de cierre"
-              class="form__close-icon"
+              class="form__close-icon form__close-icon_form-image"
+              id="close-image-form"
             />
           </form>
         </div>
@@ -109,114 +114,22 @@
         />
       </section>
       <section class="elements">
-        <div class="element">
-          <img
-            src="./images/yosemite.jpg"
-            alt="foto de paisaje"
-            class="element__image"
-          />
-          <img
-            src="./images/Trash.svg"
-            alt="boton de eliminacion"
-            class="element__trash"
-          />
-          <h3 class="element__description">Valle de Yosemite</h3>
-          <img
-            src="./images/like.svg"
-            alt="boton me gusta"
-            class="element__like"
-          />
-        </div>
-        <div class="element">
-          <img
-            src="./images/lago_louise.jpg"
-            alt="foto de paisaje"
-            class="element__image"
-          />
-          <img
-            src="./images/Trash.svg"
-            alt="boton de eliminacion"
-            class="element__trash"
-          />
-          <img
-            src="./images/like.svg"
-            alt="boton me gusta"
-            class="element__like"
-          />
-          <h3 class="element__description">Lago Louise</h3>
-        </div>
-        <div class="element">
-          <img
-            src="./images/montañas_calvas.jpg"
-            alt="foto de paisaje"
-            class="element__image"
-          />
-          <img
-            src="./images/Trash.svg"
-            alt="boton de eliminacion"
-            class="element__trash"
-          />
-          <img
-            src="./images/like.svg"
-            alt="boton me gusta"
-            class="element__like"
-          />
-          <h3 class="element__description">Montañas Calvas</h3>
-        </div>
-        <div class="element">
-          <img
-            src="./images/latemar.jpg"
-            alt="foto de paisaje"
-            class="element__image"
-          />
-          <img
-            src="./images/Trash.svg"
-            alt="boton de eliminacion"
-            class="element__trash"
-          />
-          <h3 class="element__description">Latemar</h3>
-          <img
-            src="./images/like.svg"
-            alt="boton me gusta"
-            class="element__like"
-          />
-        </div>
-        <div class="element">
-          <img
-            src="./images/vanois.jpg"
-            alt="foto de paisaje"
-            class="element__image"
-          />
-          <img
-            src="./images/Trash.svg"
-            alt="boton de eliminacion"
-            class="element__trash"
-          />
-          <img
-            src="./images/like.svg"
-            alt="boton me gusta"
-            class="element__like"
-          />
-          <h3 class="element__description">Vanois National Park</h3>
-        </div>
-        <div class="element">
-          <img
-            src="./images/lago_braies.png"
-            alt="foto de paisaje"
-            class="element__image"
-          />
-          <img
-            src="./images/Trash.svg"
-            alt="boton de eliminacion"
-            class="element__trash"
-          />
-          <img
-            src="./images/like.svg"
-            alt="boton me gusta"
-            class="element__like"
-          />
-          <h3 class="element__description">Lago di Braies</h3>
-        </div>
+        <template class="template">
+          <div class="element">
+            <img src="" alt="foto de paisaje" class="element__image" />
+            <img
+              src="./images/Trash.svg"
+              alt="boton de eliminacion"
+              class="element__trash"
+            />
+            <img
+              src="./images/like.svg"
+              alt="boton me gusta"
+              class="element__like"
+            />
+            <h3 class="element__description"></h3>
+          </div>
+        </template>
       </section>
       <footer class="footer">
         <p class="footer__copyright">&#169; 2024 Eduardo Parker</p>
