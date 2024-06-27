@@ -40,11 +40,7 @@ const initialCards = [
 
 // para agregar dinamicamente las imagenes
 initialCards.forEach(function (item) {
-  const newNode = templateNode.content
-    .querySelector(".element")
-    .cloneNode(true);
-  newNode.querySelector(".element__image").src = item.link;
-  newNode.querySelector(".element__description").textContent = item.name;
+  const newNode = createCard(item.name, item.link);
   elementArea.append(newNode);
 });
 
@@ -111,12 +107,7 @@ function handleImageFormSubmit(evt) {
 
   const titleInput = document.querySelector("#title").value;
   const linkInput = document.querySelector("#url").value;
-  const newNode = templateNode.content
-    .querySelector(".element")
-    .cloneNode(true);
-
-  newNode.querySelector(".element__description").textContent = titleInput;
-  newNode.querySelector(".element__image").src = linkInput;
+  const newNode = createCard(titleInput, linkInput);
   elementArea.prepend(newNode);
   formImageElement.reset();
 }
@@ -126,3 +117,24 @@ formImageElement.addEventListener(
   handleImageFormSubmit,
   imageSaveAndClose
 );
+
+// funcion para la modificacion del template
+function createCard(title, url) {
+  const newNode = templateNode.content
+    .querySelector(".element")
+    .cloneNode(true);
+
+  newNode.querySelector(".element__description").textContent = title;
+  newNode.querySelector(".element__image").src = url;
+  newNode
+    .querySelector(".element__like")
+    .addEventListener("click", function (evt) {
+      evt.target.classList.toggle("element__like_active");
+    });
+  newNode
+    .querySelector(".element__trash")
+    .addEventListener("click", function () {
+      newNode.remove();
+    });
+  return newNode;
+}
