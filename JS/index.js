@@ -1,16 +1,16 @@
-const popup = document.querySelector(".popup__profile");
+const popup = document.querySelector(".popup_profile");
 const profileButton = document.querySelector(".profile__edit-button");
 const profileCloseButton = document.querySelector(".form__close-icon_profile");
 const profileSaveButton = document.querySelector(".form__button_submit");
 const imageAddButton = document.querySelector(".profile__add-button");
-const formImage = document.querySelector(".popup__form-image");
+const formImage = document.querySelector(".popup_form-image");
 const formImageCloseButton = document.querySelector(
   ".form__close-icon_form-image"
 );
 const templateNode = document.querySelector(".template");
 const elementArea = document.querySelector(".elements");
 const imageSaveButton = document.querySelector(".form__button_submit_image");
-const popupImage = document.querySelector(".popup__zoom"); // se declara el popup de la imagen
+const popupImage = document.querySelector(".popup_zoom"); // se declara el popup de la imagen
 const popupImageClose = document.querySelector(".popup__close-button");
 
 const initialCards = [
@@ -108,7 +108,7 @@ function imageSaveAndClose() {
   formImage.classList.remove("popup_opened");
 }
 
-const formImageElement = document.querySelector(".form__image");
+const formImageElement = document.querySelector(".form_image");
 
 function handleImageFormSubmit(evt) {
   evt.preventDefault();
