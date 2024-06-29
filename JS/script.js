@@ -10,6 +10,8 @@ const formImageCloseButton = document.querySelector(
 const templateNode = document.querySelector(".template");
 const elementArea = document.querySelector(".elements");
 const imageSaveButton = document.querySelector(".form__button_submit_image");
+const popupImage = document.querySelector(".popup__zoom"); // se declara el popup de la imagen
+const popupImageClose = document.querySelector(".popup__close-button");
 
 const initialCards = [
   {
@@ -51,12 +53,14 @@ function openProfile() {
   popup.classList.add("popup_opened");
 }
 
+// se cierra formulario para el perfil
 profileCloseButton.addEventListener("click", closeProfile);
 
 function closeProfile() {
   popup.classList.remove("popup_opened");
 }
 
+// se cierra formulario para el perfil al guardar
 profileSaveButton.addEventListener("click", SaveAndClose);
 
 function SaveAndClose() {
@@ -81,19 +85,23 @@ function handleProfileFormSubmit(evt) {
 }
 formElement.addEventListener("submit", handleProfileFormSubmit, SaveAndClose);
 
-// apartado para el popup imagenes
+// apartado para el popup form - imagenes
+
+// se abre el formulario para las imagenes
 imageAddButton.addEventListener("click", openImageForm);
 
 function openImageForm() {
   formImage.classList.add("popup_opened");
 }
 
+//cierre del formulario de las imagenes
 formImageCloseButton.addEventListener("click", closeImageForm);
 
 function closeImageForm() {
   formImage.classList.remove("popup_opened");
 }
-// seccion para la modificacion de las imagenes
+// seccion para el formulario de las imagenes
+
 imageSaveButton.addEventListener("click", imageSaveAndClose);
 
 function imageSaveAndClose() {
@@ -120,12 +128,15 @@ formImageElement.addEventListener(
 
 // funcion para la modificacion del template
 function createCard(title, url) {
+  const imageTitlePopup = document.querySelector(".popup__container-text");
+  const imageSrcPopup = document.querySelector(".popup__image");
   const newNode = templateNode.content
     .querySelector(".element")
     .cloneNode(true);
 
   newNode.querySelector(".element__description").textContent = title;
   newNode.querySelector(".element__image").src = url;
+  newNode.querySelector(".element__image").alt = title;
   newNode
     .querySelector(".element__like")
     .addEventListener("click", function (evt) {
@@ -136,5 +147,18 @@ function createCard(title, url) {
     .addEventListener("click", function () {
       newNode.remove();
     });
+  //empieza zoom Image
+  newNode
+    .querySelector(".element__image")
+    .addEventListener("click", function (event) {
+      popupImage.classList.add("popup_opened");
+      imageTitlePopup.textContent = event.currentTarget.alt;
+      imageSrcPopup.src = event.currentTarget.src;
+    });
   return newNode;
 }
+
+//boton para el cierre del zon de las imagenes
+popupImageClose.addEventListener("click", function () {
+  popupImage.classList.remove("popup_opened");
+});

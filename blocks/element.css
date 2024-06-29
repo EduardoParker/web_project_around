@@ -11,6 +11,9 @@
   height: 282px;
   border-radius: 10px 10px 0 0;
 }
+.element__image:hover {
+  cursor: pointer;
+}
 .element__trash {
   border: none;
   background: url(../images/Trash.svg) center no-repeat;
