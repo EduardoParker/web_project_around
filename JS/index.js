@@ -154,6 +154,7 @@ function createCard(title, url) {
       popupImage.classList.add("popup_opened");
       imageTitlePopup.textContent = event.currentTarget.alt;
       imageSrcPopup.src = event.currentTarget.src;
+      imageSrcPopup.alt = event.currentTarget.alt;
     });
   return newNode;
 }
