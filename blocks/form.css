@@ -9,18 +9,34 @@
   line-height: 29px;
 }
 .form__input {
+  display: flex;
+  flex-direction: column;
   border: none;
   font-family: "Inter";
+}
+
+.form__error {
+  font-size: 12px;
+  width: 100%;
+  height: 16px;
+  color: red;
+  opacity: 0;
+  margin-bottom: 15px;
+}
+.form__error-active {
+  opacity: 1;
 }
 .form__item {
   border: 0;
   width: 100%;
   box-sizing: border-box;
   border-bottom: 1px solid #bcbcc4;
-  margin-bottom: 30px;
   font-weight: 400;
   font-size: 14px;
   line-height: 17px;
+}
+.form__input_type_error {
+  border-bottom: 1px solid red;
 }
 .form__button {
   width: 358px;
@@ -31,6 +47,12 @@
   border: none;
   border-radius: 2px;
 }
+.form__button_inactive {
+  color: #cccccc;
+  background: #fff;
+  pointer-events: none;
+}
+
 .form__close-icon {
   width: 40.7px;
   height: 40.7px;

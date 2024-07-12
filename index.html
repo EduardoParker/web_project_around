@@ -17,25 +17,31 @@
     <div class="page">
       <section class="popup popup_profile">
         <div class="popup__container">
-          <form class="popup__form form">
+          <form class="popup__form form" autocomplete="off" novalidate>
             <h4 class="form__name">Editar perfil</h4>
             <fieldset class="form__input">
               <input
                 type="text"
                 class="form__item form__item_name"
                 id="name"
-                name="name"
+                name="name-input"
                 placeholder="Nombre"
                 required
+                minlength="2"
+                maxlength="40"
               />
+              <span class="form__error name-input-error"></span>
               <input
                 type="text"
                 class="form__item form__item_about-me"
                 id="about-me"
-                name="about-me"
+                name="about-me-input"
                 placeholder="Acerca de mi"
                 required
+                minlength="2"
+                maxlength="200"
               />
+              <span class="form__error about-me-input-error"></span>
             </fieldset>
             <button class="form__button form__button_submit" type="submit">
               Guardar
@@ -50,25 +56,33 @@
       </section>
       <section class="popup popup_form-image">
         <div class="popup__container">
-          <form class="popup__form form form_image">
+          <form
+            class="popup__form form form_image"
+            autocomplete="off"
+            novalidate
+          >
             <h4 class="form__name">Nuevo Lugar</h4>
             <fieldset class="form__input">
               <input
                 type="text"
                 class="form__item form__item_title"
                 id="title"
-                name="title"
+                name="title-input"
                 placeholder="Titulo"
                 required
+                minlength="2"
+                maxlength="30"
               />
+              <span class="form__error title-input-error"></span>
               <input
                 type="url"
                 class="form__item form__item_link"
                 id="url"
-                name="link"
+                name="link-input"
                 placeholder="Enlace a la imagen"
                 required
               />
+              <span class="form__error link-input-error"></span>
             </fieldset>
             <button
               class="form__button form__button_submit form__button_submit_image"
@@ -147,5 +161,6 @@
       </footer>
     </div>
     <script src="./JS/index.js"></script>
+    <script src="./JS/validate.js"></script>
   </body>
 </html>

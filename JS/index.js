@@ -61,11 +61,11 @@ function closeProfile() {
 }
 
 // se cierra formulario para el perfil al guardar
-profileSaveButton.addEventListener("click", SaveAndClose);
+//profileSaveButton.addEventListener("click", SaveAndClose);
 
-function SaveAndClose() {
-  popup.classList.remove("popup_opened");
-}
+//function SaveAndClose() {
+// popup.classList.remove("popup_opened");
+//}
 
 // seccion para la modificacion del perfil
 const formElement = document.querySelector(".popup__form");
@@ -78,12 +78,14 @@ function handleProfileFormSubmit(evt) {
 
   const profileName = document.querySelector(".profile__name");
   const profileJob = document.querySelector(".profile__info-aboutme");
-
-  profileName.textContent = `${nameInput}`;
-  profileJob.textContent = `${jobInput}`;
-  formElement.reset();
+  if (!((nameInput.value && jobInput.value) === "")) {
+    profileName.textContent = `${nameInput}`;
+    profileJob.textContent = `${jobInput}`;
+    formElement.reset();
+    closeProfile();
+  }
 }
-formElement.addEventListener("submit", handleProfileFormSubmit, SaveAndClose);
+formElement.addEventListener("submit", handleProfileFormSubmit);
 
 // apartado para el popup form - imagenes
 
@@ -102,11 +104,11 @@ function closeImageForm() {
 }
 // seccion para el formulario de las imagenes
 
-imageSaveButton.addEventListener("click", imageSaveAndClose);
+//imageSaveButton.addEventListener("click", imageSaveAndClose);
 
-function imageSaveAndClose() {
-  formImage.classList.remove("popup_opened");
-}
+//function imageSaveAndClose() {
+//  formImage.classList.remove("popup_opened");
+//}
 
 const formImageElement = document.querySelector(".form_image");
 
@@ -118,13 +120,10 @@ function handleImageFormSubmit(evt) {
   const newNode = createCard(titleInput, linkInput);
   elementArea.prepend(newNode);
   formImageElement.reset();
+  closeImageForm();
 }
 
-formImageElement.addEventListener(
-  "submit",
-  handleImageFormSubmit,
-  imageSaveAndClose
-);
+formImageElement.addEventListener("submit", handleImageFormSubmit);
 
 // funcion para la modificacion del template
 function createCard(title, url) {
