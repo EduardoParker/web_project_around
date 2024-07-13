@@ -11,7 +11,7 @@ const templateNode = document.querySelector(".template");
 const elementArea = document.querySelector(".elements");
 const imageSaveButton = document.querySelector(".form__button_submit_image");
 const popupImage = document.querySelector(".popup_zoom"); // se declara el popup de la imagen
-const popupImageClose = document.querySelector(".popup__close-button");
+const popupImageCloseButton = document.querySelector(".popup__close-button");
 
 const initialCards = [
   {
@@ -60,13 +60,6 @@ function closeProfile() {
   popup.classList.remove("popup_opened");
 }
 
-// se cierra formulario para el perfil al guardar
-//profileSaveButton.addEventListener("click", SaveAndClose);
-
-//function SaveAndClose() {
-// popup.classList.remove("popup_opened");
-//}
-
 // seccion para la modificacion del perfil
 const formElement = document.querySelector(".popup__form");
 
@@ -81,7 +74,6 @@ function handleProfileFormSubmit(evt) {
   if (!((nameInput.value && jobInput.value) === "")) {
     profileName.textContent = `${nameInput}`;
     profileJob.textContent = `${jobInput}`;
-    formElement.reset();
     closeProfile();
   }
 }
@@ -104,12 +96,6 @@ function closeImageForm() {
 }
 // seccion para el formulario de las imagenes
 
-//imageSaveButton.addEventListener("click", imageSaveAndClose);
-
-//function imageSaveAndClose() {
-//  formImage.classList.remove("popup_opened");
-//}
-
 const formImageElement = document.querySelector(".form_image");
 
 function handleImageFormSubmit(evt) {
@@ -119,7 +105,6 @@ function handleImageFormSubmit(evt) {
   const linkInput = document.querySelector("#url").value;
   const newNode = createCard(titleInput, linkInput);
   elementArea.prepend(newNode);
-  formImageElement.reset();
   closeImageForm();
 }
 
@@ -158,7 +143,37 @@ function createCard(title, url) {
   return newNode;
 }
 
-//boton para el cierre del zon de las imagenes
-popupImageClose.addEventListener("click", function () {
+//boton para el cierre del zoom de las imagenes
+popupImageCloseButton.addEventListener("click", closeImagePopup);
+
+function closeImagePopup() {
   popupImage.classList.remove("popup_opened");
-});
+}
+
+//funcion para cerrar los formularios dando clinck en cualquier parte
+
+const popupEventListeners = () => {
+  const popupList = Array.from(document.querySelectorAll(".popup"));
+  popupList.forEach((popupElement) => {
+    popupElement.addEventListener("click", function (evt) {
+      if (evt.target.classList.contains("popup")) {
+        closeProfile();
+        closeImageForm();
+        closeImagePopup();
+      }
+    });
+  });
+};
+popupEventListeners();
+
+//apartado para el cierre de popup con esc
+
+document.addEventListener("keydown", keyEscHandler);
+
+function keyEscHandler(evt) {
+  if (evt.key === "Escape") {
+    closeProfile();
+    closeImageForm();
+    closeImagePopup();
+  }
+}
