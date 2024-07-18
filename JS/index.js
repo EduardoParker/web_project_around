@@ -46,11 +46,25 @@ initialCards.forEach(function (item) {
   elementArea.append(newNode);
 });
 
+//funcion para abrir los popups
+function openPopup(popup) {
+  popup.classList.add("popup_opened");
+  document.addEventListener("keydown", keyEscHandler);
+}
+
+//funcion para cerrar los popups
+function closePopups() {
+  popup.classList.remove("popup_opened");
+  document.addEventListener("keydown", keyEscHandler);
+}
+
 // apartado para el popup profile
+
 profileButton.addEventListener("click", openProfile);
 
 function openProfile() {
   popup.classList.add("popup_opened");
+  document.addEventListener("keydown", keyEscHandler);
 }
 
 // se cierra formulario para el perfil
@@ -58,6 +72,7 @@ profileCloseButton.addEventListener("click", closeProfile);
 
 function closeProfile() {
   popup.classList.remove("popup_opened");
+  document.removeEventListener("keydown", keyEscHandler);
 }
 
 // seccion para la modificacion del perfil
@@ -68,10 +83,9 @@ function handleProfileFormSubmit(evt) {
 
   const nameInput = document.querySelector("#name").value;
   const jobInput = document.querySelector("#about-me").value;
-
   const profileName = document.querySelector(".profile__name");
   const profileJob = document.querySelector(".profile__info-aboutme");
-  if (!((nameInput.value && jobInput.value) === "")) {
+  if (nameInput !== "" && jobInput !== "") {
     profileName.textContent = `${nameInput}`;
     profileJob.textContent = `${jobInput}`;
     closeProfile();
@@ -86,6 +100,7 @@ imageAddButton.addEventListener("click", openImageForm);
 
 function openImageForm() {
   formImage.classList.add("popup_opened");
+  document.addEventListener("keydown", keyEscHandler);
 }
 
 //cierre del formulario de las imagenes
@@ -93,6 +108,7 @@ formImageCloseButton.addEventListener("click", closeImageForm);
 
 function closeImageForm() {
   formImage.classList.remove("popup_opened");
+  document.removeEventListener("keydown", keyEscHandler);
 }
 // seccion para el formulario de las imagenes
 
@@ -100,12 +116,13 @@ const formImageElement = document.querySelector(".form_image");
 
 function handleImageFormSubmit(evt) {
   evt.preventDefault();
-
   const titleInput = document.querySelector("#title").value;
   const linkInput = document.querySelector("#url").value;
-  const newNode = createCard(titleInput, linkInput);
-  elementArea.prepend(newNode);
-  closeImageForm();
+  if (titleInput !== "" && linkInput !== "") {
+    const newNode = createCard(titleInput, linkInput);
+    elementArea.prepend(newNode);
+    closeImageForm();
+  }
 }
 
 formImageElement.addEventListener("submit", handleImageFormSubmit);
@@ -136,6 +153,7 @@ function createCard(title, url) {
     .querySelector(".element__image")
     .addEventListener("click", function (event) {
       popupImage.classList.add("popup_opened");
+      document.addEventListener("keydown", keyEscHandler);
       imageTitlePopup.textContent = event.currentTarget.alt;
       imageSrcPopup.src = event.currentTarget.src;
       imageSrcPopup.alt = event.currentTarget.alt;
@@ -148,6 +166,7 @@ popupImageCloseButton.addEventListener("click", closeImagePopup);
 
 function closeImagePopup() {
   popupImage.classList.remove("popup_opened");
+  document.removeEventListener("keydown", keyEscHandler);
 }
 
 //funcion para cerrar los formularios dando clinck en cualquier parte

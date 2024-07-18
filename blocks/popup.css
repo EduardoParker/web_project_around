@@ -1,11 +1,12 @@
 .popup {
   position: fixed;
-  width: 1280px;
+  width: 100%;
   height: 100%;
   font-family: "Inter";
   display: none;
   z-index: 1;
   background-color: rgba(0, 0, 0, 0.5);
+  align-content: center;
 }
 .popup__container {
   position: inherit;
@@ -21,19 +22,15 @@
 .popup_opened {
   display: block;
 }
-.popup__container-zoom {
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+.popup_zoom {
+  max-width: 100vw;
 }
 .popup__container-image {
+  width: fit-content;
   display: flex;
   flex-direction: column;
   max-width: 75vw;
-  position: relative;
+  margin: 0 auto;
 }
 .popup__image {
   max-width: 75vw;
