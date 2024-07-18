@@ -55,7 +55,7 @@ function openPopup(popup) {
 //funcion para cerrar los popups
 function closePopups() {
   popup.classList.remove("popup_opened");
-  document.addEventListener("keydown", keyEscHandler);
+  document.removeEventListener("keydown", keyEscHandler);
 }
 
 // apartado para el popup profile
