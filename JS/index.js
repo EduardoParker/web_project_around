@@ -1,79 +1,54 @@
-const popup = document.querySelector(".popup_profile");
-const profileButton = document.querySelector(".profile__edit-button");
-const profileCloseButton = document.querySelector(".form__close-icon_profile");
-const profileSaveButton = document.querySelector(".form__button_submit");
-const imageAddButton = document.querySelector(".profile__add-button");
-const formImage = document.querySelector(".popup_form-image");
-const formImageCloseButton = document.querySelector(
-  ".form__close-icon_form-image"
-);
-const templateNode = document.querySelector(".template");
-const elementArea = document.querySelector(".elements");
-const imageSaveButton = document.querySelector(".form__button_submit_image");
-const popupImage = document.querySelector(".popup_zoom"); // se declara el popup de la imagen
-const popupImageCloseButton = document.querySelector(".popup__close-button");
+import FormValidator from "./FormValidator.js";
+import Card from "./Card.js";
+import { closePopups } from "./Utils.js";
 
+const formConfig = {
+  formSelector: ".form",
+  inputSelector: ".form__item",
+  submitButtonSelector: ".form__button",
+  inactiveButtonClass: "form__button_inactive",
+  inputErrorClass: "form__input_type_error",
+  errorClass: "form__error-active",
+};
 const initialCards = [
   {
-    name: "Valle de Yosemite",
+    title: "Valle de Yosemite",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/yosemite.jpg",
   },
   {
-    name: "Lago Louise",
+    title: "Lago Louise",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/lake-louise.jpg",
   },
   {
-    name: "Montañas Calvas",
+    title: "Montañas Calvas",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/bald-mountains.jpg",
   },
   {
-    name: "Latemar",
+    title: "Latemar",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/latemar.jpg",
   },
   {
-    name: "Parque Nacional de la Vanoise",
+    title: "Parque Nacional de la Vanoise",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/vanoise.jpg",
   },
   {
-    name: "Lago di Braies",
+    title: "Lago di Braies",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/lago.jpg",
   },
 ];
 
-// para agregar dinamicamente las imagenes
-initialCards.forEach(function (item) {
-  const newNode = createCard(item.name, item.link);
-  elementArea.append(newNode);
+initialCards.forEach((item) => {
+  const card = new Card(item, ".template");
+  const cardElement = card.generateCard();
+  document.querySelector(".elements").append(cardElement);
 });
 
-//funcion para abrir los popups
-function openPopup(popup) {
-  popup.classList.add("popup_opened");
-  document.addEventListener("keydown", keyEscHandler);
-}
+const formValidatorProfile = new FormValidator(formConfig, ".popup_profile");
+formValidatorProfile.enableValidation();
+const formValidatorCard = new FormValidator(formConfig, ".popup_form-image");
+formValidatorCard.enableValidation();
 
-//funcion para cerrar los popups
-function closePopups() {
-  popup.classList.remove("popup_opened");
-  document.removeEventListener("keydown", keyEscHandler);
-}
-
-// apartado para el popup profile
-
-profileButton.addEventListener("click", openProfile);
-
-function openProfile() {
-  popup.classList.add("popup_opened");
-  document.addEventListener("keydown", keyEscHandler);
-}
-
-// se cierra formulario para el perfil
-profileCloseButton.addEventListener("click", closeProfile);
-
-function closeProfile() {
-  popup.classList.remove("popup_opened");
-  document.removeEventListener("keydown", keyEscHandler);
-}
+const elementArea = document.querySelector(".elements");
 
 // seccion para la modificacion del perfil
 const formElement = document.querySelector(".popup__form");
@@ -88,86 +63,30 @@ function handleProfileFormSubmit(evt) {
   if (nameInput !== "" && jobInput !== "") {
     profileName.textContent = `${nameInput}`;
     profileJob.textContent = `${jobInput}`;
-    closeProfile();
+    closePopups();
   }
 }
 formElement.addEventListener("submit", handleProfileFormSubmit);
 
-// apartado para el popup form - imagenes
-
-// se abre el formulario para las imagenes
-imageAddButton.addEventListener("click", openImageForm);
-
-function openImageForm() {
-  formImage.classList.add("popup_opened");
-  document.addEventListener("keydown", keyEscHandler);
-}
-
-//cierre del formulario de las imagenes
-formImageCloseButton.addEventListener("click", closeImageForm);
-
-function closeImageForm() {
-  formImage.classList.remove("popup_opened");
-  document.removeEventListener("keydown", keyEscHandler);
-}
 // seccion para el formulario de las imagenes
 
 const formImageElement = document.querySelector(".form_image");
 
 function handleImageFormSubmit(evt) {
   evt.preventDefault();
-  const titleInput = document.querySelector("#title").value;
-  const linkInput = document.querySelector("#url").value;
-  if (titleInput !== "" && linkInput !== "") {
-    const newNode = createCard(titleInput, linkInput);
-    elementArea.prepend(newNode);
-    closeImageForm();
+  const updatedCard = {
+    title: document.querySelector("#title").value,
+    link: document.querySelector("#link").value,
+  };
+  if (updatedCard.title !== "" && updatedCard.link !== "") {
+    const card = new Card(updatedCard, ".template");
+    const cardElement = card.generateCard();
+    elementArea.prepend(cardElement);
+    closePopups();
   }
 }
 
 formImageElement.addEventListener("submit", handleImageFormSubmit);
-
-// funcion para la modificacion del template
-function createCard(title, url) {
-  const imageTitlePopup = document.querySelector(".popup__container-text");
-  const imageSrcPopup = document.querySelector(".popup__image");
-  const newNode = templateNode.content
-    .querySelector(".element")
-    .cloneNode(true);
-
-  newNode.querySelector(".element__description").textContent = title;
-  newNode.querySelector(".element__image").src = url;
-  newNode.querySelector(".element__image").alt = title;
-  newNode
-    .querySelector(".element__like")
-    .addEventListener("click", function (evt) {
-      evt.target.classList.toggle("element__like_active");
-    });
-  newNode
-    .querySelector(".element__trash")
-    .addEventListener("click", function () {
-      newNode.remove();
-    });
-  //empieza zoom Image
-  newNode
-    .querySelector(".element__image")
-    .addEventListener("click", function (event) {
-      popupImage.classList.add("popup_opened");
-      document.addEventListener("keydown", keyEscHandler);
-      imageTitlePopup.textContent = event.currentTarget.alt;
-      imageSrcPopup.src = event.currentTarget.src;
-      imageSrcPopup.alt = event.currentTarget.alt;
-    });
-  return newNode;
-}
-
-//boton para el cierre del zoom de las imagenes
-popupImageCloseButton.addEventListener("click", closeImagePopup);
-
-function closeImagePopup() {
-  popupImage.classList.remove("popup_opened");
-  document.removeEventListener("keydown", keyEscHandler);
-}
 
 //funcion para cerrar los formularios dando clinck en cualquier parte
 
@@ -176,23 +95,9 @@ const popupEventListeners = () => {
   popupList.forEach((popupElement) => {
     popupElement.addEventListener("click", function (evt) {
       if (evt.target.classList.contains("popup")) {
-        closeProfile();
-        closeImageForm();
-        closeImagePopup();
+        closePopups();
       }
     });
   });
 };
 popupEventListeners();
-
-//apartado para el cierre de popup con esc
-
-document.addEventListener("keydown", keyEscHandler);
-
-function keyEscHandler(evt) {
-  if (evt.key === "Escape") {
-    closeProfile();
-    closeImageForm();
-    closeImagePopup();
-  }
-}
