@@ -53,14 +53,14 @@
   pointer-events: none;
 }
 
-.form__close-icon {
+.popup__close-button_form {
   width: 40.7px;
   height: 40.7px;
   position: absolute;
   top: -40px;
   right: -40px;
 }
-.form__close-icon:hover {
+.popup__close-button_form:hover {
   background: #ffffff99;
   cursor: pointer;
 }

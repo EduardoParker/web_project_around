@@ -1,13 +1,13 @@
-const popupImage = document.querySelector(".popup_zoom");
-const popupImageCloseButton = document.querySelector(".popup__close-button");
+const popupImageCloseButton = document.querySelector("#close-button-image");
 const imageTitlePopup = document.querySelector(".popup__container-text");
 const imageSrcPopup = document.querySelector(".popup__image");
 
 export default class Card {
-  constructor(data, cardSelector) {
+  constructor(data, cardSelector, { handleCardClick }) {
     this._title = data.title;
     this._link = data.link;
     this._cardSelector = cardSelector;
+    this._handleCardClick = handleCardClick;
   }
   _getTemplate() {
     const cardElement = document
@@ -27,6 +27,7 @@ export default class Card {
 
     return this._element;
   }
+  /*
   _handleOpenPopup() {
     imageSrcPopup.src = this._link;
     imageTitlePopup.textContent = this._title;
@@ -36,36 +37,50 @@ export default class Card {
       this._handleEscKey(evt);
     });
   }
+
   _handleClosePopup() {
     imageSrcPopup.src = "";
     popupImage.classList.remove("popup_opened");
   }
+*/
   _handleLikeEvent(evt) {
     evt.target.classList.toggle("element__like_active");
   }
+
   _handleEscKey(evt) {
     if (evt.key === "Escape") {
       this._handleClosePopup();
     }
   }
+
   _handleTrashButton() {
     this._element.remove();
   }
   _setEventListeners() {
     // listener en la imagen para abrir el popup
+    /*
     this._element
       .querySelector(".element__image")
       .addEventListener("click", () => {
         this._handleOpenPopup();
       });
+
     // listener para el cierre del popup
     popupImageCloseButton.addEventListener("click", () => {
       this._handleClosePopup();
     });
     // listener para el cierre con ESC
+
     document.addEventListener("keydown", (evt) => {
       this._handleEscKey(evt);
     });
+*/
+    //listener para las imagenes usando el handleCardClick
+    this._element
+      .querySelector(".element__image")
+      .addEventListener("click", () => {
+        this._handleCardClick(this._link, this._title);
+      });
     //listener para el like
     this._element
       .querySelector(".element__like")
@@ -80,5 +95,3 @@ export default class Card {
       });
   }
 }
-
-export { popupImage };
