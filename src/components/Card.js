@@ -27,22 +27,6 @@ export default class Card {
 
     return this._element;
   }
-  /*
-  _handleOpenPopup() {
-    imageSrcPopup.src = this._link;
-    imageTitlePopup.textContent = this._title;
-    imageSrcPopup.alt = this._title;
-    popupImage.classList.add("popup_opened");
-    document.removeEventListener("keydown", (evt) => {
-      this._handleEscKey(evt);
-    });
-  }
-
-  _handleClosePopup() {
-    imageSrcPopup.src = "";
-    popupImage.classList.remove("popup_opened");
-  }
-*/
   _handleLikeEvent(evt) {
     evt.target.classList.toggle("element__like_active");
   }
@@ -57,24 +41,6 @@ export default class Card {
     this._element.remove();
   }
   _setEventListeners() {
-    // listener en la imagen para abrir el popup
-    /*
-    this._element
-      .querySelector(".element__image")
-      .addEventListener("click", () => {
-        this._handleOpenPopup();
-      });
-
-    // listener para el cierre del popup
-    popupImageCloseButton.addEventListener("click", () => {
-      this._handleClosePopup();
-    });
-    // listener para el cierre con ESC
-
-    document.addEventListener("keydown", (evt) => {
-      this._handleEscKey(evt);
-    });
-*/
     //listener para las imagenes usando el handleCardClick
     this._element
       .querySelector(".element__image")

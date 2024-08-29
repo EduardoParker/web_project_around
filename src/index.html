@@ -116,6 +116,45 @@
           <p class="popup__container-text"></p>
         </div>
       </section>
+      <section class="popup popup_delete-image">
+        <div class="popup__container popup__container_delete-image">
+          <img
+            src="<%=require('./images/Close_icon.svg')%>"
+            alt="boton de cierre"
+            class="popup__close-button popup__close-button_form"
+          />
+          <h4 class="form__name">¿Estás seguro/a?</h4>
+          <button class="form__button form__button_submit" type="submit">
+            Sí
+          </button>
+        </div>
+      </section>
+      <section class="popup popup_avatar">
+        <div class="popup__container">
+          <form class="popup__form form" autocomplete="off" novalidate>
+            <img
+              src="<%=require('./images/Close_icon.svg')%>"
+              alt="boton de cierre"
+              class="popup__close-button popup__close-button_form"
+            />
+            <h4 class="form__name">Cambiar foto de perfil</h4>
+            <fieldset class="form__input">
+              <input
+                type="url"
+                class="form__item form__item_avatar-link"
+                id="link_avatar"
+                name="link_avatar"
+                placeholder="Enlace a la imagen del avatar"
+                required
+              />
+              <span class="form__error link_avatar-error"></span>
+            </fieldset>
+            <button class="form__button form__button_submit" type="submit">
+              Guardar
+            </button>
+          </form>
+        </div>
+      </section>
 
       <section class="header">
         <img
@@ -126,7 +165,18 @@
         <div class="header__line"></div>
       </section>
       <section class="profile">
-        <div class="profile__avatar"></div>
+        <div class="profile__avatar">
+          <img
+            src="<%=require('./images/profile.jpg')%>"
+            alt=""
+            class="profile__image-avatar"
+          />
+          <img
+            src="<%=require('./images/update_avatar.svg')%>"
+            alt="boton para editar avatar"
+            class="profile__avatar_update-button"
+          />
+        </div>
         <div class="profile__info">
           <div class="profile__info-name">
             <h1 class="profile__name">Jacques Cousteau</h1>

@@ -12,11 +12,17 @@ import {
   nameInput,
   jobInput,
   formConfig,
+  popupConfirmation,
+  avatarButton,
+  popupAvatar,
+  avatarInput,
+  profileAvatar,
 } from "../utils/Utils.js";
 import Section from "../components/Section.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
+import Popup from "../components/popup.js";
 
 const initialCards = [
   {
@@ -73,6 +79,9 @@ formValidatorProfile.enableValidation();
 const formValidatorCard = new FormValidator(formConfig, ".popup_form-image");
 formValidatorCard.enableValidation();
 
+const formValidatorAvatar = new FormValidator(formConfig, ".popup_avatar");
+formValidatorAvatar.enableValidation();
+
 const elementArea = document.querySelector(".elements");
 
 //seccion para la instancia del zoom image
@@ -104,7 +113,6 @@ const addCardForm = new PopupWithForm({
   },
 });
 imageAddButton.addEventListener("click", () => {
-  //enableValidation(formConfig);
   addCardForm.open();
 });
 addCardForm.setEventListener();
@@ -134,3 +142,26 @@ profileButton.addEventListener("click", () => {
   jobInput.value = userData.job;
 });
 editProfile.setEventListener();
+
+// seccion para instanciar el popup de confirmacion
+
+const closePopupConfirmation = new Popup({ popupSelector: popupConfirmation });
+closePopupConfirmation.setEventListener();
+
+// seccion pata la instancia del popup avatar
+const avatarUpdate = new PopupWithForm({
+  popupSelector: popupAvatar,
+  handleFormSubmit: (inputValue) => {
+    if (inputValue.link_avatar !== "") {
+      console.log(inputValue.link_avatar);
+      profileAvatar.src = inputValue.link_avatar;
+      avatarUpdate.close();
+    }
+  },
+});
+
+avatarButton.addEventListener("click", () => {
+  avatarUpdate.open();
+  avatarInput.value = profileAvatar.src;
+});
+avatarUpdate.setEventListener();

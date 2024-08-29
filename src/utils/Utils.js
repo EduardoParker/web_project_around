@@ -22,6 +22,15 @@ const formConfig = {
   errorClass: "form__error-active",
 };
 
+// popup confirmation
+const popupConfirmation = document.querySelector(".popup_delete-image");
+
+// popup avatar
+const avatarButton = document.querySelector(".profile__avatar");
+const popupAvatar = document.querySelector(".popup_avatar");
+const avatarInput = document.querySelector("#link_avatar");
+const profileAvatar = document.querySelector(".profile__image-avatar");
+
 export {
   profileButton,
   imageAddButton,
@@ -33,4 +42,9 @@ export {
   nameInput,
   jobInput,
   formConfig,
+  popupConfirmation,
+  avatarButton,
+  popupAvatar,
+  avatarInput,
+  profileAvatar,
 };
