@@ -55,12 +55,7 @@
   line-height: 14.5px;
   margin-top: 10px;
 }
-.popup__container_delete-image {
-  display: flex;
-  flex-direction: column;
-  max-width: 75vw;
-  margin: 0 auto;
-}
+
 
 @media screen and (min-width: 320px) and (max-width: 620px) {
   .popup__container {

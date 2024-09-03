@@ -48,7 +48,11 @@
               />
               <span class="form__error about-error"></span>
             </fieldset>
-            <button class="form__button form__button_submit" type="submit">
+            <button
+              class="form__button form__button_submit"
+              type="submit"
+              id="update_profile"
+            >
               Guardar
             </button>
           </form>
@@ -73,13 +77,13 @@
                 type="text"
                 class="form__item form__item_title"
                 id="title"
-                name="title"
+                name="name"
                 placeholder="Titulo"
                 required
                 minlength="2"
                 maxlength="30"
               />
-              <span class="form__error title-error"></span>
+              <span class="form__error name-error"></span>
               <input
                 type="url"
                 class="form__item form__item_link"
@@ -93,7 +97,7 @@
             <button
               class="form__button form__button_submit form__button_submit_image"
               type="submit"
-              id="create-image"
+              id="create_image"
             >
               Crear
             </button>
@@ -117,21 +121,31 @@
         </div>
       </section>
       <section class="popup popup_delete-image">
-        <div class="popup__container popup__container_delete-image">
-          <img
-            src="<%=require('./images/Close_icon.svg')%>"
-            alt="boton de cierre"
-            class="popup__close-button popup__close-button_form"
-          />
-          <h4 class="form__name">¿Estás seguro/a?</h4>
-          <button class="form__button form__button_submit" type="submit">
-            Sí
-          </button>
+        <div class="popup__container">
+          <form
+            class="popup__form form form_delete"
+            autocomplete="off"
+            novalidate
+          >
+            <img
+              src="<%=require('./images/Close_icon.svg')%>"
+              alt="boton de cierre"
+              class="popup__close-button popup__close-button_form"
+            />
+            <h4 class="form__name">¿Estás seguro/a?</h4>
+            <button class="form__button form__button_submit" type="submit">
+              Sí
+            </button>
+          </form>
         </div>
       </section>
       <section class="popup popup_avatar">
         <div class="popup__container">
-          <form class="popup__form form" autocomplete="off" novalidate>
+          <form
+            class="popup__form form form_avatar-update"
+            autocomplete="off"
+            novalidate
+          >
             <img
               src="<%=require('./images/Close_icon.svg')%>"
               alt="boton de cierre"
@@ -142,14 +156,18 @@
               <input
                 type="url"
                 class="form__item form__item_avatar-link"
-                id="link_avatar"
-                name="link_avatar"
+                id="avatar"
+                name="avatar"
                 placeholder="Enlace a la imagen del avatar"
                 required
               />
-              <span class="form__error link_avatar-error"></span>
+              <span class="form__error avatar-error"></span>
             </fieldset>
-            <button class="form__button form__button_submit" type="submit">
+            <button
+              class="form__button form__button_submit"
+              type="submit"
+              id="update_avatar"
+            >
               Guardar
             </button>
           </form>
@@ -168,7 +186,7 @@
         <div class="profile__avatar">
           <img
             src="<%=require('./images/profile.jpg')%>"
-            alt=""
+            alt="imagen de perfil"
             class="profile__image-avatar"
           />
           <img
@@ -199,8 +217,11 @@
           <div class="element">
             <img src="#" alt="" class="element__image" />
             <button class="element__trash"></button>
-            <button class="element__like"></button>
-            <h3 class="element__description"></h3>
+            <div class="element__info">
+              <h3 class="element__description"></h3>
+              <button class="element__like"></button>
+              <p class="element__like-counter">0</p>
+            </div>
           </div>
         </template>
       </section>

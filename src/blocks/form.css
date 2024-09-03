@@ -1,9 +1,13 @@
 .form {
   width: 358px;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
 }
 .form__name {
-  margin: 34px auto 54px;
+  margin-top: 34px;
+  margin-bottom: 54px;
   font-weight: 900;
   font-size: 24px;
   line-height: 29px;
@@ -68,6 +72,16 @@
   cursor: pointer;
   background: #000000cc;
 }
+.form_delete {
+  display: flex;
+  flex-direction: column;
+  max-width: 75vw;
+  margin: 0 auto;
+}
+/*.form_avatar-update {
+  display: flex;
+  flex-direction: column;
+}*/
 @media screen and (min-width: 320px) and (max-width: 620px) {
   .form {
     width: 238px;

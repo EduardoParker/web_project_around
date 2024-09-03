@@ -28,8 +28,13 @@ const popupConfirmation = document.querySelector(".popup_delete-image");
 // popup avatar
 const avatarButton = document.querySelector(".profile__avatar");
 const popupAvatar = document.querySelector(".popup_avatar");
-const avatarInput = document.querySelector("#link_avatar");
+const avatarInput = document.querySelector("#avatar");
 const profileAvatar = document.querySelector(".profile__image-avatar");
+
+//botones
+const updateProfile = document.querySelector("#update_profile");
+const createImage = document.querySelector("#create_image");
+const updateAvatar = document.querySelector("#update_avatar");
 
 export {
   profileButton,
@@ -47,4 +52,7 @@ export {
   popupAvatar,
   avatarInput,
   profileAvatar,
+  updateProfile,
+  createImage,
+  updateAvatar,
 };

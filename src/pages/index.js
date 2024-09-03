@@ -17,14 +17,19 @@ import {
   popupAvatar,
   avatarInput,
   profileAvatar,
+  updateProfile,
+  createImage,
+  updateAvatar,
 } from "../utils/Utils.js";
 import Section from "../components/Section.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
 import Popup from "../components/popup.js";
+import api from "../components/Api.js";
+import PopupWithConfirmation from "../components/PopupWithConfirmation.js";
 
-const initialCards = [
+/*const initialCards = [
   {
     title: "Valle de Yosemite",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/yosemite.jpg",
@@ -50,29 +55,56 @@ const initialCards = [
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/lago.jpg",
   },
 ];
+*/
+const userInfo = new UserInfo({
+  nameSelector: profileName,
+  jobSelector: profileJob,
+});
 
-//apartado para la instancia de Section
-const cardListSelector = ".elements";
+let currentUser = null;
+let cardList = null;
 
-const cardList = new Section(
-  {
-    data: initialCards,
-    renderer: (item) => {
-      const card = new Card(item, ".template", {
-        handleCardClick: (link, title) =>
-          popupZoom.open({
-            link: link,
-            title: title,
-          }),
-      });
-      const cardElement = card.generateCard();
-      cardList.addItem(cardElement);
-    },
-  },
-  cardListSelector
-);
+api.getInfo().then((user) => {
+  currentUser = user;
+  userInfo.setUserInfo({ name: user.name, about: user.about });
+  profileAvatar.src = user.avatar;
+  //apartado para la instancia de Section
+  const cardListSelector = ".elements";
+  api.getInitialCards().then((cards) => {
+    cardList = new Section(
+      {
+        data: cards,
+        renderer: (item) => {
+          const card = new Card(item, ".template", currentUser, {
+            handleCardClick: (link, name) =>
+              popupZoom.open({
+                link: link,
+                name: name,
+              }),
+            handleDeleteCard: (cardId, callback) => {
+              popupDeleteCard.open(() => {
+                api.deleteCard(cardId).then(() => {
+                  callback();
+                });
+              });
+            },
+            handleAddLike: (cardId) => {
+              return api.addCardLike(cardId);
+            },
+            handleRemoveLike: (cardId) => {
+              return api.deleteCardLike(cardId);
+            },
+          });
+          const cardElement = card.generateCard();
+          cardList.addItem(cardElement);
+        },
+      },
+      cardListSelector
+    );
 
-cardList.renderItems();
+    cardList.renderItems();
+  });
+});
 
 const formValidatorProfile = new FormValidator(formConfig, ".popup_profile");
 formValidatorProfile.enableValidation();
@@ -92,23 +124,31 @@ popupZoom.setEventListener();
 const addCardForm = new PopupWithForm({
   popupSelector: formImage,
   handleFormSubmit: (formData) => {
-    if (formData.title !== "" && formData.link !== "") {
-      const newCardImage = new Card(
-        {
-          title: formData.title,
-          link: formData.link,
-        },
-        ".template",
-        {
-          handleCardClick: (link, title) =>
+    if (formData.name !== "" && formData.link !== "") {
+      return api.addNewCard(formData.name, formData.link).then((card) => {
+        const newCardImage = new Card(card, ".template", currentUser, {
+          handleCardClick: (link, name) =>
             popupZoom.open({
               link: link,
-              title: title,
+              name: name,
             }),
-        }
-      );
-      const newCardElement = newCardImage.generateCard();
-      elementArea.prepend(newCardElement);
+          handleDeleteCard: (cardId, callback) => {
+            popupDeleteCard.open(() => {
+              api.deleteCard(cardId).then(() => {
+                callback();
+              });
+            });
+          },
+          handleAddLike: (cardId) => {
+            return api.addCardLike(cardId);
+          },
+          handleRemoveLike: (cardId) => {
+            return api.deleteCardLike(cardId);
+          },
+        });
+        const newCardElement = newCardImage.generateCard();
+        elementArea.prepend(newCardElement);
+      });
     }
   },
 });
@@ -119,18 +159,16 @@ addCardForm.setEventListener();
 
 // seccion para la instancia del popup with form -- form profile
 
-const userInfo = new UserInfo({
-  nameSelector: profileName,
-  jobSelector: profileJob,
-});
-
 const editProfile = new PopupWithForm({
   popupSelector: popup,
   handleFormSubmit: (inputValues) => {
     if (inputValues.name !== "" && inputValues.about !== "") {
-      profileName.textContent = inputValues.name;
-      profileJob.textContent = inputValues.about;
-      editProfile.close();
+      return api
+        .updateProfile(inputValues.name, inputValues.about)
+        .then((user) => {
+          userInfo.setUserInfo({ name: user.name, about: user.about });
+          editProfile.close();
+        });
     }
   },
 });
@@ -139,23 +177,18 @@ profileButton.addEventListener("click", () => {
   editProfile.open();
   const userData = userInfo.getUserInfo();
   nameInput.value = userData.name;
-  jobInput.value = userData.job;
+  jobInput.value = userData.about;
 });
 editProfile.setEventListener();
-
-// seccion para instanciar el popup de confirmacion
-
-const closePopupConfirmation = new Popup({ popupSelector: popupConfirmation });
-closePopupConfirmation.setEventListener();
 
 // seccion pata la instancia del popup avatar
 const avatarUpdate = new PopupWithForm({
   popupSelector: popupAvatar,
   handleFormSubmit: (inputValue) => {
-    if (inputValue.link_avatar !== "") {
-      console.log(inputValue.link_avatar);
-      profileAvatar.src = inputValue.link_avatar;
-      avatarUpdate.close();
+    if (inputValue.avatar !== "") {
+      return api.updateAvatarProfile(inputValue.avatar).then((user) => {
+        profileAvatar.src = inputValue.avatar;
+      });
     }
   },
 });
@@ -165,3 +198,9 @@ avatarButton.addEventListener("click", () => {
   avatarInput.value = profileAvatar.src;
 });
 avatarUpdate.setEventListener();
+
+//inicializacion de popupconfirmation
+const popupDeleteCard = new PopupWithConfirmation({
+  popupSelector: popupConfirmation,
+});
+popupDeleteCard.setEventListener();
