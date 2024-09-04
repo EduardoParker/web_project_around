@@ -136,8 +136,6 @@ class Api {
         console.log("Error. La solicitud ha fallado: ", err);
       });
   }
-
-  // otros métodos para trabajar con la API
 }
 
 const api = new Api({

@@ -189,11 +189,13 @@
             alt="imagen de perfil"
             class="profile__image-avatar"
           />
-          <img
-            src="<%=require('./images/update_avatar.svg')%>"
-            alt="boton para editar avatar"
-            class="profile__avatar_update-button"
-          />
+          <div class="profile__avatar-container">
+            <img
+              src="<%=require('./images/update_avatar.svg')%>"
+              alt="boton para editar avatar"
+              class="profile__update-button"
+            />
+          </div>
         </div>
         <div class="profile__info">
           <div class="profile__info-name">

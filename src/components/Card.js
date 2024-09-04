@@ -62,7 +62,6 @@ export default class Card {
         counter.textContent = this._data.likes.length;
       });
     }
-    //evt.target.classList.toggle("element__like_active");
   }
 
   _handleEscKey(evt) {
